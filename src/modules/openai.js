@@ -53,8 +53,8 @@ const getContext = channelId => {
 };
 
 const askOpenAI = async (interaction, prompt) => {
-  const { channelId, member } = interaction;
-  addMessageToChannel(channelId, { user: member.nickname, content: prompt });
+  const { channelId, user, member } = interaction;
+  addMessageToChannel(channelId, { user: member.nickname || user.globalName || user.username, content: prompt });
   const context = getContext(channelId);
   const response = await openai.createChatCompletion({
     model,
