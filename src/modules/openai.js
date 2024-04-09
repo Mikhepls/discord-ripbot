@@ -37,7 +37,6 @@ const getContext = channelId => {
     content: ''
   };
   const channel = channels.find(channel => channel.channelId === channelId);
-  console.log(channel);
   if (channel) {
     for (const message of channel.messages) {
       if (message.user !== 'system') {
@@ -54,8 +53,8 @@ const getContext = channelId => {
 };
 
 const askOpenAI = async (interaction, prompt) => {
-  const { channelId, user } = interaction;
-  addMessageToChannel(channelId, { user: user.username, content: prompt });
+  const { channelId, member } = interaction;
+  addMessageToChannel(channelId, { user: member.nickname, content: prompt });
   const context = getContext(channelId);
   const response = await openai.createChatCompletion({
     model,
