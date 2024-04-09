@@ -15,7 +15,7 @@ module.exports = {
     ),
   async execute(interaction) {
     await interaction.deferReply();
-    const response = await openAI.askOpenAI(interaction.options.getString('prompt'));
+    const response = await openAI.askOpenAI(interaction, interaction.options.getString('prompt'));
     await interaction.editReply(response);
   }
 };
